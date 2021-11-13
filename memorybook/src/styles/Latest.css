@@ -1,0 +1,53 @@
+.Latest{
+    color: white;
+    background-color: #181818;
+
+    padding: 20px 0px;
+    margin: 0px 10px;
+    border-radius: 25px;
+    text-align: center;
+}
+
+.Latest-Items{
+    margin: 50px 0px;
+}
+
+.Latest-Items-List{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+
+    list-style: none;
+}
+
+.Latest-Items-List-Item{
+    position: relative;
+    margin-top: 50px;
+    margin-right: 2.5%;
+    text-align: left;
+}
+
+.Latest-Items-List-Item-Title{
+    position: absolute;
+    text-align: left;
+    padding: 10px;
+    bottom: -35px;
+    left: -10px;
+    background-color: #181818;
+    border-radius: 15px;
+}
+
+.Latest-Items-List-Item-Date{
+    position: absolute;
+    text-align: right;
+    padding: 10px;
+    bottom: -35px;
+    right: -10px;
+    background-color: #181818;
+    border-radius: 15px;
+}
+
+.Latest-Items-List-Item img{
+    width: 450px;
+}
