@@ -1,0 +1,44 @@
+.NavBar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 0px 60px;
+
+    margin-bottom: 150px;
+
+    box-shadow: 0 14px 45px 51px #181818;
+
+    background-color: #181818;
+    color: white;
+}
+
+.NavBar-Menu ul{
+    display: flex;
+    justify-content: space-between;
+
+    align-items: center;
+    list-style: none;
+    text-decoration: none;
+}
+
+.NavBar-Menu ul li, .NavBar-Account li{
+    margin: 0px 10px;
+}
+
+.NavBar-Account{
+    display: flex;
+    justify-content: space-between;
+
+    align-items: center;
+    list-style: none;
+    text-decoration: none;
+}
+
+
+a{
+    list-style: none;
+    text-decoration: none;
+
+    color: white;
+}

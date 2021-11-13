@@ -1,10 +1,13 @@
-import { useState, createElement } from 'react';
+import { useState } from 'react';
 
 import Header from './components/Header.js';
 import Latest from './components/Latest.js';
 import Book from './components/Book.js';
 import Footer from './components/Footer';
 import './App.css';
+import '../src/styles/Header.css'
+import '../src/styles/Latest.css'
+import '../src/styles/Footer.css'
 
 function App() {
   const [page, setPage] = useState('/Latest')
@@ -15,6 +18,7 @@ function App() {
   };
 
   const navigationChangeHandler = (path) =>{
+    console.log(path);
     setPage(path);
   }
 

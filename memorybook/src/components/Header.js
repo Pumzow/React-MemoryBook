@@ -11,20 +11,28 @@ const Header = ({navigationChangeHandler}) => {
 
     return (
       <header className="NavBar" onClick={onHeaderClick}>
-        <h1 className="NavBar-Logo"> MemoryBook </h1>
+        <h1 className="NavBar-Logo"> <a href="/Latest"> MemoryBook </a></h1>
         <nav className="NavBar-Menu">
             <ul>
                 <li>
-                    <a href="/Latest"> Latest </a>
+                <h3> <a href="/Latest">  Latest  </a></h3>
                 </li>
                 <li>
-                    <a href="/Book"> Book </a>
+                <h2><a href="/Book">  Book  </a></h2>
                 </li>
                 <li>
-                    <a href="/Share"> Share </a>
+                <h3><a href="/Share">  Share  </a></h3>
                 </li>
             </ul>
         </nav>
+        <ul className="NavBar-Account">
+            <li>
+                <a href="/Profile"> Profile </a>
+            </li>
+            <li>
+                <a href="/SignOut"> Sign out </a>
+            </li>
+        </ul>
       </header>
   );
 };
