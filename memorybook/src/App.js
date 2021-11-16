@@ -4,6 +4,7 @@ import Header from './components/Header.js';
 import Latest from './components/Latest.js';
 import Book from './components/Book.js';
 import Footer from './components/Footer';
+
 import './App.css';
 import '../src/styles/Header.css'
 import '../src/styles/Latest.css'
@@ -21,6 +22,9 @@ function App() {
     console.log(path);
     setPage(path);
   }
+
+
+  
 
   return (
     <div className="App">

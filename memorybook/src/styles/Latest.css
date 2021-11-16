@@ -3,7 +3,7 @@
     background-color: #181818;
 
     padding: 20px 0px;
-    margin: 0px 10px;
+    margin: 0px 70px;
     border-radius: 25px;
     text-align: center;
 }
@@ -49,5 +49,5 @@
 }
 
 .Latest-Items-List-Item img{
-    width: 450px;
+    width: 430px;
 }
