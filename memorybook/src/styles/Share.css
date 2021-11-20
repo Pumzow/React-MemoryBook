@@ -11,3 +11,38 @@
     border-radius: 25px;
     text-align: center;
 }
+
+
+#Share-Form-Title, #Share-Form-Description, #Share-Form-ImageURL{
+  width: 300%;
+}
+
+#Share-Form-Description{
+  height: 150px;
+  
+  resize: none;
+}
+
+#Share-Form{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+
+    padding: 40px;
+    line-height: 40px;
+    text-align: left;
+}
+
+#MemoryPreviewImage-parent{
+    width: 500px;
+    height: 400px;
+}
+
+#MemoryPreviewImage{
+    object-fit: cover;
+    overflow: hidden;
+    border: white 10px solid;
+    width: 100%;
+    height: 100%;
+}
