@@ -1,8 +1,13 @@
 .Footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 10px 50px;
+
     width: 100%;
-    margin-top: 150px;
-    background-color: #181818;
+    margin-top: 100px;
+    background-color: #181818a7;
     color: white;
     text-align: center;
-    height: 100px;
  }

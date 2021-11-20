@@ -12,3 +12,7 @@ body{
 *, *::after, *::before{
 	box-sizing: border-box;
 }
+
+main{
+  min-height: calc(100vh - 211px - 58px);
+}

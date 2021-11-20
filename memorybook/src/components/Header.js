@@ -18,7 +18,7 @@ const Header = ({navigationChangeHandler}) => {
                 <h3> <a href="/Latest">  Latest  </a></h3>
                 </li>
                 <li>
-                <h2><a href="/Book">  Book  </a></h2>
+                <h2><a href="/Memories">  Memories  </a></h2>
                 </li>
                 <li>
                 <h3><a href="/Share">  Share  </a></h3>
