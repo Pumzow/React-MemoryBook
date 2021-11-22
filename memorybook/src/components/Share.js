@@ -39,6 +39,17 @@ function ChangeMemoryPreviewImage(e){
   
   memoryPreviewImageRef.src = imageUrlRef.value
 
+  fetch('imageUrlRef.value', {
+      method: 'HEAD'
+   })
+   .then(res => {
+      if (res.ok) {
+         console.log('Image exists.');
+      } else {
+         console.log('Image does not exist.');
+      }
+   }).catch(err => console.log('Error:', err));
+
   if(imageUrlRef.value == "")
   {
     memoryPreviewImageRef.src = "https://merriam-webster.com/assets/mw/images/gallery/gal-home-edpick-lg/empty-speech-bubble-7508-68642ecb0f0a19313dd31c16f67e67e1@1x.jpg";

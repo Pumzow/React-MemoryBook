@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import {Routes, Route } from 'react-router-dom';
 
 import Header from './components/Header.js';
 import Latest from './components/Latest.js';
@@ -13,25 +14,17 @@ import '../src/styles/Share.css'
 import '../src/styles/Footer.css'
 
 function App() {
-  const [page, setPage] = useState('/Latest')
-
-  const routes = {
-    '/Latest': <Latest />,
-    '/Memories': <Memories />,
-    '/Share': <Share />,
-  };
-
-  const navigationChangeHandler = (path) =>{
-    console.log(path);
-    setPage(path);
-  }
-
   return (
     <div className="App">
-      <Header navigationChangeHandler={navigationChangeHandler}/>
+      <Header />
 
       <main>
-        {routes[page] || <h2> 404 Not Found! </h2> }
+        <Routes>
+          <Route path="/" element={<Latest />} />
+          <Route path="/Latest" element={<Latest />} />
+          <Route path="/Memories" element={<Memories />} />
+          <Route path="/Share" element={<Share />} />
+        </Routes>
       </main>
 
       <Footer />

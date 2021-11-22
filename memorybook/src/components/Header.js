@@ -1,36 +1,29 @@
-const Header = ({navigationChangeHandler}) => {
-    const onHeaderClick = (e) => {
-        e.preventDefault();
+import { Link, NavLink } from 'react-router-dom';
 
-        if(e.target.tagName === 'A') 
-        {
-            let url = new URL(e.target.href);
-            navigationChangeHandler(url.pathname);
-        }
-    };
+const Header = () => {
 
     return (
-      <header className="NavBar" onClick={onHeaderClick}>
-        <h1 className="NavBar-Logo"> <a href="/Latest"> MemoryBook </a></h1>
+      <header className="NavBar">
+        <h1 className="NavBar-Logo"> <NavLink to="/Latest"> MemoryBook </NavLink></h1>
         <nav className="NavBar-Menu">
             <ul>
                 <li>
-                <h3> <a href="/Latest">  Latest  </a></h3>
+                <h3> <NavLink to="/Latest">  Latest  </NavLink></h3>
                 </li>
                 <li>
-                <h2><a href="/Memories">  Memories  </a></h2>
+                <h2><NavLink to="/Memories">  Memories  </NavLink></h2>
                 </li>
                 <li>
-                <h3><a href="/Share">  Share  </a></h3>
+                <h3><NavLink to="/Share">  Share  </NavLink></h3>
                 </li>
             </ul>
         </nav>
         <ul className="NavBar-Account">
             <li>
-                <a href="/Profile"> Profile </a>
+                <NavLink to="/Profile"> Profile </NavLink>
             </li>
             <li>
-                <a href="/SignOut"> Sign out </a>
+                <NavLink to="/SignOut"> Sign out </NavLink>
             </li>
         </ul>
       </header>
