@@ -4,6 +4,7 @@ import {Routes, Route } from 'react-router-dom';
 import Header from './components/Header.js';
 import Latest from './components/Latest.js';
 import Memories from './components/Memories.js';
+import Memory from './components/Memory';
 import Share from './components/Share';
 import Footer from './components/Footer';
 
@@ -23,6 +24,7 @@ function App() {
           <Route path="/" element={<Latest />} />
           <Route path="/Latest" element={<Latest />} />
           <Route path="/Memories" element={<Memories />} />
+          <Route path="/Memory/:memoryId" element={<Memory />} />
           <Route path="/Share" element={<Share />} />
         </Routes>
       </main>

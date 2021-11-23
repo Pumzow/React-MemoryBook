@@ -3,7 +3,7 @@ import { collection, getDocs } from 'firebase/firestore'
 import { db } from '../firebase';
 
 import { FaArrowAltCircleRight, FaArrowAltCircleLeft } from 'react-icons/fa'
-import LatestMemory from './LatestMemory.js';
+import MemoryItem from './MemoryItem.js';
 
 
 
@@ -47,9 +47,7 @@ const Memories = () => {
             key={index}
           >
             {index === current && (
-              <a href="">
-                <LatestMemory key={memory.id} memory = {memory}/>
-              </a>
+                <MemoryItem key={memory.id} memory = {memory}/>
             )}
           </div>
         );

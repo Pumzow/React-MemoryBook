@@ -1,7 +1,9 @@
 import { collection, addDoc } from 'firebase/firestore'
 import { db } from '../firebase';
+import MemoryItem from './MemoryItem.js';
 
 const Book = () => {
+    
 
     return (
       <section className="Share">
@@ -32,29 +34,22 @@ const Book = () => {
 function ChangeMemoryPreviewImage(e){
   e.preventDefault();
 
-  
-
   const memoryPreviewImageRef = document.querySelector('#MemoryPreviewImage');
   const imageUrlRef = document.querySelector('#Share-Form-ImageURL');
   
-  memoryPreviewImageRef.src = imageUrlRef.value
 
-  fetch('imageUrlRef.value', {
+  fetch(imageUrlRef.value, {
       method: 'HEAD'
    })
    .then(res => {
       if (res.ok) {
          console.log('Image exists.');
+         memoryPreviewImageRef.src = imageUrlRef.value
       } else {
          console.log('Image does not exist.');
+         memoryPreviewImageRef.src = "https://merriam-webster.com/assets/mw/images/gallery/gal-home-edpick-lg/empty-speech-bubble-7508-68642ecb0f0a19313dd31c16f67e67e1@1x.jpg";
       }
    }).catch(err => console.log('Error:', err));
-
-  if(imageUrlRef.value == "")
-  {
-    memoryPreviewImageRef.src = "https://merriam-webster.com/assets/mw/images/gallery/gal-home-edpick-lg/empty-speech-bubble-7508-68642ecb0f0a19313dd31c16f67e67e1@1x.jpg";
-  }
-
 }
 
 async function ShareMemory(e){
