@@ -3,7 +3,7 @@ import { collection, getDocs } from 'firebase/firestore'
 import { db } from '../firebase';
 
 import { FaArrowAltCircleRight, FaArrowAltCircleLeft } from 'react-icons/fa'
-import MemoryItem from './MemoryItem.js';
+import MemoryItem from './Items/MemoryItem';
 
 
 

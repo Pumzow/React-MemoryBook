@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import {Routes, Route } from 'react-router-dom';
 
 import Header from './components/Header.js';
@@ -11,6 +10,7 @@ import Footer from './components/Footer';
 import './App.css';
 import '../src/styles/Header.css'
 import '../src/styles/Latest.css'
+import '../src/styles/Details.css'
 import '../src/styles/Share.css'
 import '../src/styles/Footer.css'
 

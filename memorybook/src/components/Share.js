@@ -1,6 +1,6 @@
 import { collection, addDoc } from 'firebase/firestore'
 import { db } from '../firebase';
-import MemoryItem from './MemoryItem.js';
+import MemoryItem from './Items/MemoryItem.js';
 
 const Book = () => {
     

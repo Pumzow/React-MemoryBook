@@ -36,6 +36,8 @@
 .Latest-Items-List-Item{
     position: relative;
     margin-right: 2.5%;
+    width: 800px;
+    height: 500px;
     text-align: left;
 }
 
@@ -63,11 +65,6 @@
     text-shadow: rgb(0, 0, 0) 5px 0 10px;
     /*background-color: #181818;
     border-radius: 15px;*/
-}
-
-.Latest-Items-List-Item{
-    width: 800px;
-    height: 500px;
 }
 
 .Latest-Items-List-Item:hover{
