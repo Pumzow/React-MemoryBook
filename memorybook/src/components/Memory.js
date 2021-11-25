@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { getDoc, doc } from 'firebase/firestore'
+import { getDoc, doc, deleteDoc } from 'firebase/firestore'
 import { db } from '../firebase';
 import MemoryDetailsItem from './Items/MemoryDetailsItem.js';
 
@@ -24,8 +24,10 @@ const Memory = () => {
     getMemory();
   }, [memoryId]);
 
-  const onDeleteHandler = (e) =>{
+  const onDeleteHandler = async(e) =>{
     e.preventDefault();
+
+    await deleteDoc(doc(db, "Memories", memoryId));
 
     navigate("/Memories");
   }
