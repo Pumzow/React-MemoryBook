@@ -13,6 +13,7 @@ import './App.css';
 import '../src/styles/Header.css'
 import '../src/styles/Register.css'
 import '../src/styles/Latest.css'
+import '../src/styles/Memories.css'
 import '../src/styles/Details.css'
 import '../src/styles/Share.css'
 import '../src/styles/Footer.css'

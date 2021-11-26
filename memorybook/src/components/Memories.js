@@ -36,10 +36,10 @@ const Memories = () => {
     }
 
     return (
-      <section className="Latest">
+      <section className="Memories">
         <h1> Memory Book </h1>
-        <article className="Latest-Slider">
-        <FaArrowAltCircleLeft  className='Latest-Item-Previous' onClick={prevSlide}/>
+        <article className="Memories-Slider">
+        <FaArrowAltCircleLeft  className='Memories-Item-Previous' onClick={prevSlide}/>
         {memories.map((memory, index) => {
           return (
           <div
@@ -53,7 +53,7 @@ const Memories = () => {
         );
       })}
 
-        <FaArrowAltCircleRight className='Latest-Item-Next' onClick={nextSlide}/>
+        <FaArrowAltCircleRight className='Memories-Item-Next' onClick={nextSlide}/>
         </article>
     </section>
   );
