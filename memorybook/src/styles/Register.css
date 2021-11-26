@@ -1,0 +1,42 @@
+.Register{
+
+    color: white;
+    background-color: #181818a7;
+    font-size: 30px;
+
+    height: 740px;
+
+    padding: 50px 100px;
+    margin: 0px 70px;
+    border-radius: 25px;
+    text-align: center;
+}
+
+
+#Register-Form-Email, #Register-Form-Username, #Register-Form-Password, #Register-Form-Repeat-Password, #Register-Form-ImageURL{
+  width: 300%;
+}
+
+#Register-Form{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+
+    padding: 40px;
+    line-height: 40px;
+    text-align: left;
+}
+
+#UserPreviewImage-parent{
+    width: 500px;
+    height: 400px;
+}
+
+#UserPreviewImage{
+    object-fit: cover;
+    overflow: hidden;
+    border: white 10px solid;
+    width: 100%;
+    height: 100%;
+}

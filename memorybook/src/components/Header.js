@@ -1,7 +1,6 @@
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const Header = () => {
-
     return (
       <header className="NavBar">
         <h1 className="NavBar-Logo"> <NavLink to="/"> MemoryBook </NavLink></h1>
@@ -24,6 +23,12 @@ const Header = () => {
             </li>
             <li>
                 <NavLink to="/SignOut"> Sign out </NavLink>
+            </li>
+            <li>
+                <NavLink to="/Login"> Login </NavLink>
+            </li>
+            <li>
+                <NavLink to="/Register"> Register </NavLink>
             </li>
         </ul>
       </header>
