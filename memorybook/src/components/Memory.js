@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { getDoc, doc, deleteDoc } from 'firebase/firestore'
 import { db } from '../firebase';
+import { getAuth } from "firebase/auth";
+import { getDoc, doc, deleteDoc } from 'firebase/firestore'
 import MemoryDetailsItem from './Items/MemoryDetailsItem.js';
 
 
@@ -9,6 +10,19 @@ import MemoryDetailsItem from './Items/MemoryDetailsItem.js';
 const Memory = () => {
   const navigate = useNavigate();
 
+  const auth = getAuth();
+
+  const [user, setUser] = useState();
+
+  useEffect(() => {
+      auth.onAuthStateChanged(setUser);
+  });
+
+  if(user === null)
+  {
+    navigate("/Login");
+  }
+  
   const { memoryId } = useParams();
 
   const [memory, setMemory] = useState({});

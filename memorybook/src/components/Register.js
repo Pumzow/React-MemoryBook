@@ -1,10 +1,23 @@
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { collection, addDoc } from 'firebase/firestore'
 import { db } from '../firebase';
+import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { collection, addDoc } from 'firebase/firestore'
 
 const Register = () => {
     const navigate = useNavigate();
+
+    const auth = getAuth();
+
+    const [user, setUser] = useState();
+
+    useEffect(() => {
+        auth.onAuthStateChanged(setUser);
+    });
+
+    if (user !== null) {
+        navigate("/Memories");
+    }
 
     const onRegisterHandler = async (e) => {
         e.preventDefault();
@@ -17,8 +30,11 @@ const Register = () => {
         const auth = getAuth();
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
-                // Signed in 
                 const user = userCredential.user;
+
+                updateProfile(user, {
+                    displayName: username
+                });
 
                 saveUserToDatabase(user.uid, username);
             })

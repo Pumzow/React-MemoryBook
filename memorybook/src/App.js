@@ -1,4 +1,4 @@
-import {Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
 import Header from './components/Header.js';
 import Login from './components/Login.js';
@@ -26,16 +26,16 @@ function App() {
       <Header />
 
       <main>
-        <Routes>
-          <Route path="/Login" element={<Login />} />
-          <Route path="/Register" element={<Register />} />
-          <Route path="/" element={<Latest />} />
-          <Route path="/Latest" element={<Latest />} />
-          <Route path="/Memories" element={<Memories />} />
-          <Route path="/Memory/:memoryId" element={<Memory />} />
-          <Route path="/Memory/Edit/:memoryId" element={<Edit />} />
-          <Route path="/Share" element={<Share />} />
-        </Routes>
+          <Routes>
+            <Route path="/Login" element={<Login />} />
+            <Route path="/Register" element={<Register />} />
+            <Route path="/" element={<Latest />} />
+            <Route path="/Latest" element={<Latest />} />
+            <Route path="/Memories" element={<Memories />} />
+            <Route path="/Memory/:memoryId" element={<Memory />} />
+            <Route path="/Memory/Edit/:memoryId" element={<Edit />} />
+            <Route path="/Share" element={<Share />} />
+          </Routes>
       </main>
 
       <Footer />

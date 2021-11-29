@@ -1,10 +1,24 @@
-import { updateDoc, doc, getDoc } from 'firebase/firestore'
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { db } from '../firebase';
+import { getAuth } from "firebase/auth";
+import { updateDoc, doc, getDoc } from 'firebase/firestore'
 
 const Edit = () => {
     const navigate = useNavigate();
+  
+    const auth = getAuth();
+  
+    const [user, setUser] = useState();
+  
+    useEffect(() => {
+        auth.onAuthStateChanged(setUser);
+    });
+  
+    if(user === null)
+    {
+      navigate("/Login");
+    }
 
     const { memoryId } = useParams();
 

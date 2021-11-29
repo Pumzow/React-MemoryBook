@@ -1,9 +1,24 @@
-import { collection, addDoc } from 'firebase/firestore'
+import { useState, useEffect} from 'react'
 import { useNavigate } from 'react-router-dom'
 import { db } from '../firebase';
+import { getAuth } from "firebase/auth";
+import { collection, addDoc } from 'firebase/firestore'
 
 const Share = () => {
   const navigate = useNavigate();
+
+  const auth = getAuth();
+
+  const [user, setUser] = useState();
+
+  useEffect(() => {
+      auth.onAuthStateChanged(setUser);
+  });
+
+  if(user === null)
+  {
+    navigate("/Login");
+  }
 
   const onShareHandler = async (e) => {
     e.preventDefault();

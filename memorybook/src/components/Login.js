@@ -2,9 +2,23 @@ import { collection, addDoc } from 'firebase/firestore'
 import { useNavigate } from 'react-router-dom'
 import { db } from '../firebase';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { useState, useEffect } from 'react';
 
 const Login = () => {
     const navigate = useNavigate();
+
+    const auth = getAuth();
+
+    const [user, setUser] = useState();
+
+    useEffect(() => {
+        auth.onAuthStateChanged(setUser);
+    });
+
+    if(user !== null)
+    {
+      navigate("/Memories");
+    }
 
     const onLoginHandler = async (e) => {
         e.preventDefault();
@@ -12,20 +26,15 @@ const Login = () => {
         let formData = new FormData(e.currentTarget);
         let { email, username, password } = Object.fromEntries(formData)
 
-        console.log(email, username, password);
-
-        const auth = getAuth();
         signInWithEmailAndPassword(auth, email, password)
-          .then((userCredential) => {
-            // Signed in 
-            const user = userCredential.user;
-            console.log(`Users ID: ${user.uid}`);
-            // ...
-          })
-          .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-          });
+            .then((userCredential) => {
+                const user = userCredential.user;
+                //navigate("/Memories");
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+            });
     };
 
     return (
