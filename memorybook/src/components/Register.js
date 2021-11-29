@@ -1,25 +1,40 @@
-import { collection, addDoc } from 'firebase/firestore'
 import { useNavigate } from 'react-router-dom'
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { collection, addDoc } from 'firebase/firestore'
 import { db } from '../firebase';
 
 const Register = () => {
     const navigate = useNavigate();
 
-    const onShareHandler = async (e) => {
+    const onRegisterHandler = async (e) => {
         e.preventDefault();
 
         let formData = new FormData(e.currentTarget);
-        let { title, description, imageUrl } = Object.fromEntries(formData)
+        let { email, username, password } = Object.fromEntries(formData)
 
-        console.log(title, description, imageUrl);
+        console.log(email, username, password);
 
-        const memoriesRef = collection(db, "Memories");
+        const auth = getAuth();
+        createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                // Signed in 
+                const user = userCredential.user;
+
+                saveUserToDatabase(user.uid, username);
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+            });
+    };
+
+    const saveUserToDatabase = async (id, username) => {
+        const usersRef = collection(db, "Users");
 
         const docRef = await addDoc(
-            memoriesRef, {
-            Title: title,
-            Description: description,
-            ImageURL: imageUrl,
+            usersRef, {
+            Id: id,
+            Username: username,
         }
         )
             .then(() => {
@@ -28,12 +43,12 @@ const Register = () => {
             .catch((error) => {
                 alert("Unsuccessful operation, error: " + error)
             })
-    };
+    }
 
     return (
         <section className="Register">
             <h1> Register User </h1>
-            <form id="Register-Form" onSubmit={onShareHandler}>
+            <form id="Register-Form" onSubmit={onRegisterHandler}>
                 <div className="container">
                     <label htmlFor="leg-title"> E-mail </label><br />
                     <input id="Register-Form-Email" type="text" name="email" placeholder="Enter e-mail..." /><br />

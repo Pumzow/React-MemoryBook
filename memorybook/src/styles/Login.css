@@ -1,0 +1,29 @@
+.Login{
+
+    color: white;
+    background-color: #181818a7;
+    font-size: 30px;
+
+    height: 740px;
+
+    padding: 50px 100px;
+    margin: 0px 70px;
+    border-radius: 25px;
+    text-align: center;
+}
+
+
+#Login-Form-Email, #Login-Form-Username, #Login-Form-Password{
+  width: 300%;
+}
+
+#Login-Form{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+
+    padding: 40px;
+    line-height: 40px;
+    text-align: left;
+}

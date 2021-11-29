@@ -1,6 +1,7 @@
 import {Routes, Route } from 'react-router-dom';
 
 import Header from './components/Header.js';
+import Login from './components/Login.js';
 import Register from './components/Register.js';
 import Latest from './components/Latest.js';
 import Memories from './components/Memories.js';
@@ -11,6 +12,7 @@ import Footer from './components/Footer';
 
 import './App.css';
 import '../src/styles/Header.css'
+import '../src/styles/Login.css'
 import '../src/styles/Register.css'
 import '../src/styles/Latest.css'
 import '../src/styles/Memories.css'
@@ -25,6 +27,7 @@ function App() {
 
       <main>
         <Routes>
+          <Route path="/Login" element={<Login />} />
           <Route path="/Register" element={<Register />} />
           <Route path="/" element={<Latest />} />
           <Route path="/Latest" element={<Latest />} />
