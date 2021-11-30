@@ -4,10 +4,9 @@ import { useState, useEffect } from 'react';
 
 const Header = () => {
     const navigate = useNavigate();
-
     const auth = getAuth();
 
-    const [user, setUser] = useState();
+    const [user, setUser] = useState(auth.displayName);
 
     useEffect(() => {
         auth.onAuthStateChanged(setUser);
@@ -38,7 +37,7 @@ const Header = () => {
                 </ul>
             </nav>
             <ul className="NavBar-Account">
-                {user !== null
+                {user != null
                     ? <>
                         <li>
                             <NavLink to="/Profile"> {user.displayName} </NavLink>

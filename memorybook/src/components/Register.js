@@ -23,7 +23,7 @@ const Register = () => {
         e.preventDefault();
 
         let formData = new FormData(e.currentTarget);
-        let { email, username, password } = Object.fromEntries(formData)
+        let { email, username, password, imageUrl } = Object.fromEntries(formData)
 
         console.log(email, username, password);
 
@@ -33,7 +33,8 @@ const Register = () => {
                 const user = userCredential.user;
 
                 updateProfile(user, {
-                    displayName: username
+                    displayName: username,
+                    photoURL: imageUrl
                 });
 
                 saveUserToDatabase(user.uid, username);
