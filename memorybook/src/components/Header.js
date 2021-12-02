@@ -28,12 +28,17 @@ const Header = () => {
                     <li>
                         <h3> <NavLink to="/Latest">  Latest  </NavLink></h3>
                     </li>
-                    <li>
-                        <h2><NavLink to="/Memories">  Memories  </NavLink></h2>
-                    </li>
-                    <li>
-                        <h3><NavLink to="/Share">  Share  </NavLink></h3>
-                    </li>
+                    {user != null
+                        ? <>
+                            <li>
+                                <h2><NavLink to="/Memories">  Memories  </NavLink></h2>
+                            </li>
+                            <li>
+                                <h3><NavLink to="/Share">  Share  </NavLink></h3>
+                            </li>
+                        </>
+                        : <></>
+                    }
                 </ul>
             </nav>
             <ul className="NavBar-Account">

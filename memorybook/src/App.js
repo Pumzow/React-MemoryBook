@@ -18,6 +18,7 @@ import '../src/styles/Latest.css'
 import '../src/styles/Memories.css'
 import '../src/styles/Details.css'
 import '../src/styles/Share.css'
+import '../src/styles/Edit.css'
 import '../src/styles/Footer.css'
 
 function App() {

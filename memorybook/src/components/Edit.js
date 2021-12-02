@@ -52,15 +52,15 @@ const Edit = () => {
     };
 
     return (
-        <section className="Share">
+        <section className="Edit">
             <h1> Edit Memory </h1>
-            <form id="Share-Form" onSubmit={onEditHandler}>
+            <form id="Edit-Form" onSubmit={onEditHandler}>
                 <div className="container">
                     <label htmlFor="leg-title"> Title </label><br />
-                    <input id="Share-Form-Title" type="text" name="title" placeholder="Enter memory title..." defaultValue={memory.Title} /><br />
+                    <input id="Edit-Form-Title" type="text" name="title" placeholder="Enter memory title..." defaultValue={memory.Title} /><br />
 
                     <label htmlFor="category"> Description </label><br />
-                    <textarea id="Share-Form-Description" type="text" name="description" placeholder="Enter memory description..." defaultValue={memory.Description} /><br />
+                    <textarea id="Edit-Form-Description" type="text" name="description" placeholder="Enter memory description..." defaultValue={memory.Description} /><br />
 
                     <input className="btn submit" type="submit" value="Save" />
                 </div>

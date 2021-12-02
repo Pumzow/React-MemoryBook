@@ -1,0 +1,48 @@
+.Edit{
+
+    color: white;
+    background-color: #181818a7;
+    font-size: 30px;
+
+    height: 740px;
+
+    padding: 50px 100px;
+    margin: 0px 70px;
+    border-radius: 25px;
+    text-align: center;
+}
+
+
+#Edit-Form-Title, #Edit-Form-Description, #Edit-Form-ImageURL{
+  width: 300%;
+}
+
+#Edit-Form-Description{
+  height: 150px;
+  
+  resize: none;
+}
+
+#Edit-Form{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+
+    padding: 40px;
+    line-height: 40px;
+    text-align: left;
+}
+
+#MemoryPreviewImage-parent{
+    width: 500px;
+    height: 400px;
+}
+
+#MemoryPreviewImage{
+    object-fit: cover;
+    overflow: hidden;
+    border: white 10px solid;
+    width: 100%;
+    height: 100%;
+}
