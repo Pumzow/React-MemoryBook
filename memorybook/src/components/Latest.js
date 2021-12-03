@@ -14,7 +14,7 @@ const Latest = () => {
   useEffect(() => {
     const getMemories = async () => {
       const data = await getDocs(memoriesRef);
-      setMemories(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+      setMemories(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })).sort(compareLatest).slice(0, 3));
     }
 
     getMemories();
@@ -30,6 +30,8 @@ const Latest = () => {
   const prevSlide = () => {
     setCurrent(current === 0 ? length - 1 : current - 1);
   };
+
+  console.log(memories);
 
 
   return (
@@ -59,3 +61,7 @@ const Latest = () => {
 };
 
 export default Latest;
+
+const compareLatest = (a, b) =>{
+  return b.Likes-a.Likes;
+};
