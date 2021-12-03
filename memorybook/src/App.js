@@ -9,6 +9,7 @@ import Memory from './components/Memory';
 import Share from './components/Share';
 import Edit from './components/Edit';
 import Footer from './components/Footer';
+import Policy from './components/Policy';
 
 import './App.css';
 import '../src/styles/Header.css'
@@ -20,6 +21,7 @@ import '../src/styles/Details.css'
 import '../src/styles/Share.css'
 import '../src/styles/Edit.css'
 import '../src/styles/Footer.css'
+import '../src/styles/Policy.css'
 
 function App() {
   return (
@@ -36,6 +38,7 @@ function App() {
             <Route path="/Memory/:memoryId" element={<Memory />} />
             <Route path="/Memory/Edit/:memoryId" element={<Edit />} />
             <Route path="/Share" element={<Share />} />
+            <Route path="/Privacy-Policy" element={<Policy />} />
           </Routes>
       </main>
 

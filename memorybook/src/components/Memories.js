@@ -46,30 +46,29 @@ const Memories = () => {
     setCurrent(current === 0 ? length - 1 : current - 1);
   };
 
-  if (!Array.isArray(memories) || memories.length <= 0) {
-    return null;
-  }
-
   return (
     <section className="Memories">
       <h1> Memory Book </h1>
-      <article className="Memories-Slider">
-        <FaArrowAltCircleLeft className='Memories-Item-Previous' onClick={prevSlide} />
-        {memories.map((memory, index) => {
-          return (
-            <div
-              className={index === current ? 'slide active' : 'slide'}
-              key={index}
-            >
-              {index === current && (
-                <MemoryItem key={memory.id} memory={memory} />
-              )}
-            </div>
-          );
-        })}
+      {length > 0
+        ? <article className="Memories-Slider">
+          <FaArrowAltCircleLeft className='Memories-Item-Previous' onClick={prevSlide} />
+          {memories.map((memory, index) => {
+            return (
+              <div
+                className={index === current ? 'slide active' : 'slide'}
+                key={index}
+              >
+                {index === current && (
+                  <MemoryItem key={memory.id} memory={memory} />
+                )}
+              </div>
+            );
+          })}
 
-        <FaArrowAltCircleRight className='Memories-Item-Next' onClick={nextSlide} />
-      </article>
+          <FaArrowAltCircleRight className='Memories-Item-Next' onClick={nextSlide} />
+        </article>
+        : <p> Searching for memories... </p>
+      }
     </section>
   );
 
