@@ -50,22 +50,12 @@ const Memories = () => {
     <section className="Memories">
       <h1> Memory Book </h1>
       {length > 0
-        ? <article className="Memories-Slider">
-          <FaArrowAltCircleLeft className='Memories-Item-Previous' onClick={prevSlide} />
-          {memories.map((memory, index) => {
+        ? <article>
+          {memories.map((memory) => {
             return (
-              <div
-                className={index === current ? 'slide active' : 'slide'}
-                key={index}
-              >
-                {index === current && (
-                  <MemoryItem key={memory.id} memory={memory} />
-                )}
-              </div>
+              <MemoryItem key={memory.id} memory={memory} />
             );
           })}
-
-          <FaArrowAltCircleRight className='Memories-Item-Next' onClick={nextSlide} />
         </article>
         : <p> Searching for memories... </p>
       }
