@@ -40,3 +40,7 @@ a{
 
     color: white;
 }
+
+.SignOut:hover{
+    cursor: pointer;
+}

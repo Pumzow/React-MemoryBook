@@ -48,7 +48,7 @@ const Header = () => {
                             <NavLink to="/Profile"> {user.displayName} </NavLink>
                         </li>
                         <li>
-                            <p onClick={signOutHandler}> Sign out </p>
+                            <p className="SignOut" onClick={signOutHandler}> Sign out </p>
                         </li>
                     </>
                     : <>

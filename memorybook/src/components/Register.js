@@ -19,7 +19,7 @@ const Register = () => {
 
     useEffect(() => {
         auth.onAuthStateChanged(setUser);
-    });
+    },[auth]);
 
     if (user !== null) {
         navigate("/Memories");
@@ -48,9 +48,7 @@ const Register = () => {
             return;
         }
 
-        console.log(imageUrl);
-
-        if(imageUrl == null || imageUrl === '' || imageUrl === 'https://i0.wp.com/www.artstation.com/assets/default_avatar.jpg?ssl=1'){
+        if(imageUrl == null || imageUrl === '' || document.querySelector('#UserPreviewImage').src === 'https://i0.wp.com/www.artstation.com/assets/default_avatar.jpg?ssl=1'){
             setInvalidImageUrl(true);
             return;
         }
@@ -58,8 +56,6 @@ const Register = () => {
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 const user = userCredential.user;
-
-                
 
                 updateProfile(user, {
                     displayName: username,
@@ -70,14 +66,13 @@ const Register = () => {
             })
             .catch((error) => {
                 const errorCode = error.code;
-                const errorMessage = error.message;
 
                 console.log(errorCode);
 
-                if (errorCode === "auth/invalid-email") {
+                if (errorCode === "auth/invalid-email" || errorCode === "auth/email-already-in-use") {
                     setInvalidEmail(true);
                 }
-                if (errorCode === "auth/weak-password" || password.length > 32) {
+                if (errorCode === "auth/weak-password" || errorCode === "auth/internal-error" || password.length > 32) {
                     setInvalidPassword(true);
                 }
             });
@@ -86,12 +81,11 @@ const Register = () => {
     const saveUserToDatabase = async (id, username) => {
         const usersRef = collection(db, "Users");
 
-        const docRef = await addDoc(
+        await addDoc(
             usersRef, {
             Id: id,
             Username: username,
-        }
-        )
+        })
             .then(() => {
                 navigate("/Memories");
             })
