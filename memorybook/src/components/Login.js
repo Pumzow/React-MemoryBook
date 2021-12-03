@@ -10,21 +10,23 @@ const Login = () => {
     const auth = getAuth();
 
     const [user, setUser] = useState();
+    const [invalidCredentials, setInvalidCredentials] = useState(false);
 
     useEffect(() => {
         auth.onAuthStateChanged(setUser);
     });
 
-    if(user !== null)
-    {
-      navigate("/Memories");
+    if (user !== null) {
+        navigate("/Memories");
     }
 
     const onLoginHandler = async (e) => {
         e.preventDefault();
 
         let formData = new FormData(e.currentTarget);
-        let { email, username, password } = Object.fromEntries(formData)
+        let { email, password } = Object.fromEntries(formData)
+
+
 
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
@@ -34,6 +36,12 @@ const Login = () => {
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
+
+                console.log(errorCode);
+
+                if (errorCode === "auth/invalid-email" || "auth/wrong-password") {
+                    setInvalidCredentials(true);
+                }
             });
     };
 
@@ -41,12 +49,12 @@ const Login = () => {
         <section className="Login">
             <h1> Login User </h1>
             <form id="Login-Form" onSubmit={onLoginHandler}>
-                <div className="container">
+                <div className="container"
+                >
+                    {invalidCredentials ? <p className="InvalidField"> Invalid Credentials</p> : <></>}
+
                     <label htmlFor="leg-title"> E-mail </label><br />
                     <input id="Login-Form-Email" type="text" name="email" placeholder="Enter e-mail..." /><br />
-
-                    <label htmlFor="category"> Username </label><br />
-                    <input id="Login-Form-Username" type="text" name="username" placeholder="Enter username..." /><br />
 
                     <label htmlFor="category"> Password </label><br />
                     <input id="Login-Form-Password" type="password" name="password" placeholder="Enter password..." /><br />

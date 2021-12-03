@@ -11,6 +11,12 @@ const Register = () => {
 
     const [user, setUser] = useState();
 
+    const [invalidEmail, setInvalidEmail] = useState(false);
+    const [invalidUsername, setInvalidUsername] = useState(false);
+    const [invalidPassword, setInvalidPassword] = useState(false);
+    const [invalidRepeatPassword, setInvalidRepeatPassword] = useState(false);
+    const [invalidImageUrl, setInvalidImageUrl] = useState(false);
+
     useEffect(() => {
         auth.onAuthStateChanged(setUser);
     });
@@ -22,15 +28,38 @@ const Register = () => {
     const onRegisterHandler = async (e) => {
         e.preventDefault();
 
+        setInvalidEmail(false);
+        setInvalidUsername(false); 
+        setInvalidPassword(false);
+        setInvalidRepeatPassword(false);
+        setInvalidImageUrl(false);
+
         let formData = new FormData(e.currentTarget);
-        let { email, username, password, imageUrl } = Object.fromEntries(formData)
+        let { email, username, password, repeatPassword, imageUrl } = Object.fromEntries(formData)
 
-        console.log(email, username, password);
+        if (username.length <= 3 || username.length > 18) {
+            console.log("here");
+            setInvalidUsername(true);
+            return;
+        }
 
+        if (password !== repeatPassword) {
+            setInvalidRepeatPassword(true);
+            return;
+        }
+
+        console.log(imageUrl);
+
+        if(imageUrl == null || imageUrl === '' || imageUrl === 'https://i0.wp.com/www.artstation.com/assets/default_avatar.jpg?ssl=1'){
+            setInvalidImageUrl(true);
+            return;
+        }
         const auth = getAuth();
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 const user = userCredential.user;
+
+                
 
                 updateProfile(user, {
                     displayName: username,
@@ -42,6 +71,15 @@ const Register = () => {
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
+
+                console.log(errorCode);
+
+                if (errorCode === "auth/invalid-email") {
+                    setInvalidEmail(true);
+                }
+                if (errorCode === "auth/weak-password" || password.length > 32) {
+                    setInvalidPassword(true);
+                }
             });
     };
 
@@ -67,6 +105,13 @@ const Register = () => {
             <h1> Register User </h1>
             <form id="Register-Form" onSubmit={onRegisterHandler}>
                 <div className="container">
+
+                    {invalidEmail ? <p className="InvalidField"> Wrong E-mail or it's already in use</p> : <></>}
+                    {invalidUsername ? <p className="InvalidField"> Username must be 6 - 18 characters long</p> : <></>}
+                    {invalidPassword ? <p className="InvalidField"> Password must be 6 - 32 characters long</p> : <></>}
+                    {invalidRepeatPassword ? <p className="InvalidField"> Both passwords must match</p> : <></>}
+                    {invalidImageUrl ? <p className="InvalidField"> Invalid image URL</p> : <></>}
+
                     <label htmlFor="leg-title"> E-mail </label><br />
                     <input id="Register-Form-Email" type="text" name="email" placeholder="Enter e-mail..." /><br />
 
@@ -77,7 +122,7 @@ const Register = () => {
                     <input id="Register-Form-Password" type="password" name="password" placeholder="Enter password..." /><br />
 
                     <label htmlFor="category"> Repeat Password </label><br />
-                    <input id="Register-Form-Password" type="password" name="repea-password" placeholder="Repeat password..." /><br />
+                    <input id="Register-Form-Repeat-Password" type="password" name="repeatPassword" placeholder="Repeat password..." /><br />
 
                     <label htmlFor="game-img">Image URL </label><br />
                     <input id="Register-Form-ImageURL" type="text" name="imageUrl" placeholder="Upload a photo..." onChange={ChangeUserPreviewImage} /><br />
@@ -112,7 +157,6 @@ const ChangeUserPreviewImage = (e) => {
                 memoryPreviewImageRef.src = "https://i0.wp.com/www.artstation.com/assets/default_avatar.jpg?ssl=1";
             }
         }).catch(err => {
-            console.log('Error:', err);
 
             memoryPreviewImageRef.src = "https://i0.wp.com/www.artstation.com/assets/default_avatar.jpg?ssl=1";
         });

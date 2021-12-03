@@ -16,3 +16,9 @@ body{
 main{
   min-height: calc(100vh - 211px - 58px);
 }
+
+.InvalidField{
+  color: rgb(225, 56, 56);
+  font-size: 18px;
+  margin-top: -30px;
+}
