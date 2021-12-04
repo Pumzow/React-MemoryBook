@@ -5,15 +5,15 @@ import { AuthContext } from '../../contexts/AuthContext';
 
 import { db } from '../../firebase';
 import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { collection, addDoc } from 'firebase/firestore'
+import { collection, addDoc, doc, setDoc } from 'firebase/firestore'
 
 const Register = () => {
     const navigate = useNavigate();
-  
-    const {user} = useContext(AuthContext);
-  
+
+    const { user } = useContext(AuthContext);
+
     if (user !== null) {
-      navigate("/Memories");
+        navigate("/Memories");
     }
 
     const [invalidEmail, setInvalidEmail] = useState(false);
@@ -26,7 +26,7 @@ const Register = () => {
         e.preventDefault();
 
         setInvalidEmail(false);
-        setInvalidUsername(false); 
+        setInvalidUsername(false);
         setInvalidPassword(false);
         setInvalidRepeatPassword(false);
         setInvalidImageUrl(false);
@@ -45,7 +45,7 @@ const Register = () => {
             return;
         }
 
-        if(imageUrl == null || imageUrl === '' || document.querySelector('#UserPreviewImage').src === 'https://i0.wp.com/www.artstation.com/assets/default_avatar.jpg?ssl=1'){
+        if (imageUrl == null || imageUrl === '' || document.querySelector('#UserPreviewImage').src === 'https://i0.wp.com/www.artstation.com/assets/default_avatar.jpg?ssl=1') {
             setInvalidImageUrl(true);
             return;
         }
@@ -75,20 +75,18 @@ const Register = () => {
             });
     };
 
-    const saveUserToDatabase = async (id, username) => {
-        const usersRef = collection(db, "Users");
-
-        await addDoc(
+    const saveUserToDatabase = async (id, username) => {        
+        const usersRef = doc(db, 'Users', id);
+        await setDoc(
             usersRef, {
-            Id: id,
-            Username: username,
-        })
+                Username: username
+            })
             .then(() => {
                 navigate("/Memories");
             })
             .catch((error) => {
                 alert("Unsuccessful operation, error: " + error)
-            })
+            });
     }
 
     return (

@@ -49,7 +49,7 @@ const Memory = () => {
   return (
     <section>
       <article>
-        <MemoryDetailsItem key={memoryId} memory={memory} />
+        <MemoryDetailsItem key={memoryId} memory={memory} memoryId={memoryId} />
       </article>
       <article className="Memory-Interactions">
         <button> Like </button>

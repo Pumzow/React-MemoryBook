@@ -1,4 +1,4 @@
-import { useContext} from 'react'
+import { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { AuthContext } from '../../contexts/AuthContext';
@@ -9,19 +9,38 @@ import { collection, addDoc } from 'firebase/firestore'
 const Share = () => {
   const navigate = useNavigate();
 
-  const {user} = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
   if (user === null) {
     navigate("/Login");
   }
 
+  const [invalidTitle, setInvalidTitle] = useState(false);
+  const [invalidDescription, setInvalidDescription] = useState(false);
+  const [invalidImageUrl, setInvalidImageUrl] = useState(false);
+
   const onShareHandler = async (e) => {
     e.preventDefault();
+
+    setInvalidTitle(false);
+    setInvalidDescription(false);
+    setInvalidImageUrl(false);
 
     let formData = new FormData(e.currentTarget);
     let { title, description, imageUrl } = Object.fromEntries(formData)
 
-    console.log(title, description, imageUrl);
+    if (title.length === '' || title.length > 32) {
+      setInvalidTitle(true);
+      return;
+    }
+    if (description.length > 150) {
+      setInvalidDescription(true);
+      return;
+    }
+    if (imageUrl == null || imageUrl === '' || document.querySelector('#MemoryPreviewImage').src === 'https://merriam-webster.com/assets/mw/images/gallery/gal-home-edpick-lg/empty-speech-bubble-7508-68642ecb0f0a19313dd31c16f67e67e1@1x.jpg') {
+      setInvalidImageUrl(true);
+      return;
+    }
 
     const memoriesRef = collection(db, "Memories");
 
@@ -53,6 +72,10 @@ const Share = () => {
       <h1> Share Memory </h1>
       <form id="Share-Form" onSubmit={onShareHandler}>
         <div className="container">
+          {invalidTitle ? <p className="InvalidField"> Title must be 1-32 characters long </p> : <></>}
+          {invalidDescription ? <p className="InvalidField"> Description must be maximum of 150 characters long </p> : <></>}
+          {invalidImageUrl ? <p className="InvalidField"> Invalid image URL </p> : <></>}
+
           <label htmlFor="leg-title"> Title </label><br />
           <input id="Share-Form-Title" type="text" name="title" placeholder="Enter memory title..." /><br />
 
