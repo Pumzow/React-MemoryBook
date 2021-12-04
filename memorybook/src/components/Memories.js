@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 import { collection, getDocs } from 'firebase/firestore'
 import { db } from '../firebase';
 import { getAuth } from "firebase/auth";
 
-import { FaArrowAltCircleRight, FaArrowAltCircleLeft } from 'react-icons/fa'
 import MemoryItem from './Items/MemoryItem.js';
 
 
@@ -17,7 +17,7 @@ const Memories = () => {
 
   useEffect(() => {
     auth.onAuthStateChanged(setUser);
-  });
+  }, [auth]);
 
   if (user === null) {
     navigate("/Login");
@@ -35,20 +35,11 @@ const Memories = () => {
     getMemories();
   }, []);
 
-  const [current, setCurrent] = useState(0);
   const length = memories.length;
-
-  const nextSlide = () => {
-    setCurrent(current === length - 1 ? 0 : current + 1);
-  };
-
-  const prevSlide = () => {
-    setCurrent(current === 0 ? length - 1 : current - 1);
-  };
 
   return (
     <section className="Memories">
-      <h1> Memory Book </h1>
+      <h1> Memories </h1>
       {length > 0
         ? <article>
           {memories.map((memory) => {

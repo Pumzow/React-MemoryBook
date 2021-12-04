@@ -9,9 +9,9 @@ const MemoryItem = ({
 
     return (
             <Link to={`/memory/${memory.id}`}>
-              <div  className="Latest-Items-List-Item">
-                <h3 className="Latest-Items-List-Item-Title"> {title} </h3>
-                <h3 className="Latest-Items-List-Item-Date"> {date} </h3>
+              <div  className="Home-Items-List-Item">
+                <h3 className="Home-Items-List-Item-Title"> {title} </h3>
+                <h3 className="Home-Items-List-Item-Date"> {date} </h3>
                 <img src={imageURL}  alt=""/>
               </div>
             </Link>

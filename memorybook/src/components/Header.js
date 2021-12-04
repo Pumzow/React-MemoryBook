@@ -26,7 +26,7 @@ const Header = () => {
             <nav className="NavBar-Menu">
                 <ul>
                     <li>
-                        <h3> <NavLink to="/Latest">  Latest  </NavLink></h3>
+                        <h3> <NavLink to="/Home">  Home  </NavLink></h3>
                     </li>
                     {user != null
                         ? <>
