@@ -1,9 +1,9 @@
 import { useContext} from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { AuthContext } from '../contexts/AuthContext';
+import { AuthContext } from '../../contexts/AuthContext';
 
-import { db } from '../firebase';
+import { db } from '../../firebase';
 import { collection, addDoc } from 'firebase/firestore'
 
 const Share = () => {
@@ -36,6 +36,8 @@ const Share = () => {
       Description: description,
       Date: sharedDate,
       ImageURL: imageUrl,
+      OwnerId: user.uid,
+      Likes: 0
     }
     )
       .then(() => {

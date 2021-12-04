@@ -1,11 +1,11 @@
 import { useState, useEffect, useContext } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 
-import { AuthContext } from '../contexts/AuthContext';
+import { AuthContext } from '../../contexts/AuthContext';
 
-import { db } from '../firebase';
+import { db } from '../../firebase';
 import { getDoc, doc, deleteDoc } from 'firebase/firestore'
-import MemoryDetailsItem from './Items/MemoryDetailsItem.js';
+import MemoryDetailsItem from './MemoryDetailsItem.js';
 
 
 
@@ -33,6 +33,11 @@ const Memory = () => {
     getMemory();
   }, [memoryId]);
 
+  const onEditHandler = async(e) =>{
+    e.preventDefault();
+    
+    navigate(`/memory/edit/${memoryId}`);
+  }
   const onDeleteHandler = async(e) =>{
     e.preventDefault();
 
@@ -48,8 +53,8 @@ const Memory = () => {
       </article>
       <article className="Memory-Interactions">
         <button> Like </button>
-        <button> <Link to={`/memory/edit/${memoryId}`} > Edit </Link> </button>
-        <button onClick={onDeleteHandler}>Delete</button>
+        <button onClick={onEditHandler}> Edit </button>
+        <button onClick={onDeleteHandler}> Delete </button>
       </article>
     </section>
 

@@ -22,19 +22,19 @@ const Header = () => {
 
     return (
         <header className="NavBar">
-            <h1 className="NavBar-Logo"> <NavLink to="/"> MemoryBook </NavLink></h1>
+            <h1 className="NavBar-Logo"> <NavLink className="NavBar-Menu-Button" to="/"> MemoryBook </NavLink></h1>
             <nav className="NavBar-Menu">
                 <ul>
                     <li>
-                        <h3> <NavLink to="/Home">  Home  </NavLink></h3>
+                        <h3> <NavLink className="NavBar-Menu-Button" to="/Home">  Home  </NavLink></h3>
                     </li>
                     {user != null
                         ? <>
                             <li>
-                                <h2><NavLink to="/Memories">  Memories  </NavLink></h2>
+                                <h2><NavLink className="NavBar-Menu-Button" to="/Memories">  Memories  </NavLink></h2>
                             </li>
                             <li>
-                                <h3><NavLink to="/Share">  Share  </NavLink></h3>
+                                <h3><NavLink className="NavBar-Menu-Button" to="/Share">  Share  </NavLink></h3>
                             </li>
                         </>
                         : <></>
@@ -45,18 +45,18 @@ const Header = () => {
                 {user != null
                     ? <>
                         <li>
-                            <NavLink to="/Profile"> {user.displayName} </NavLink>
+                            <NavLink className="NavBar-Menu-Button" to="/Profile"> {user.displayName} </NavLink>
                         </li>
                         <li>
-                            <p className="SignOut" onClick={signOutHandler}> Sign out </p>
+                            <p className="NavBar-Menu-Button SignOut" onClick={signOutHandler}> Sign out </p>
                         </li>
                     </>
                     : <>
                         <li>
-                            <NavLink to="/Login"> Login </NavLink>
+                            <NavLink className="NavBar-Menu-Button" to="/Login"> Login </NavLink>
                         </li>
                         <li>
-                            <NavLink to="/Register"> Register </NavLink>
+                            <NavLink className="NavBar-Menu-Button" to="/Register"> Register </NavLink>
                         </li>
                     </>
                 }

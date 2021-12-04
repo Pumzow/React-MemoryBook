@@ -3,30 +3,30 @@ import { Routes, Route } from 'react-router-dom';
 
 import { getAuth } from "firebase/auth";
 
-import Header from './components/Header.js';
-import Login from './components/Login.js';
-import Register from './components/Register.js';
-import Home from './components/Home.js';
-import Memories from './components/Memories.js';
-import Memory from './components/Memory';
-import Share from './components/Share';
-import Edit from './components/Edit';
-import Footer from './components/Footer';
-import Policy from './components/Policy';
+import Header from './components/Header/Header.js';
+import Login from './components/Login/Login.js';
+import Register from './components/Register/Register.js';
+import Home from './components/Home/Home.js';
+import Memories from './components/Memories/Memories.js';
+import Memory from './components/Details/Memory';
+import Share from './components/Share/Share';
+import Edit from './components/Edit/Edit.js';
+import Footer from './components/Footer/Footer';
+import Policy from './components/Policy/Policy';
 
 import { AuthContext } from './contexts/AuthContext.js';
 
 import './App.css';
-import '../src/styles/Header.css'
-import '../src/styles/Login.css'
-import '../src/styles/Register.css'
-import '../src/styles/Home.css'
-import '../src/styles/Memories.css'
-import '../src/styles/Details.css'
-import '../src/styles/Share.css'
-import '../src/styles/Edit.css'
-import '../src/styles/Footer.css'
-import '../src/styles/Policy.css'
+import '../src/components/Header/Header.css'
+import '../src/components/Login/Login.css'
+import '../src/components/Register/Register.css'
+import '../src/components/Home/Home.css'
+import '../src/components/Memories/Memories.css'
+import '../src/components/Details/Details.css'
+import '../src/components/Share/Share.css'
+import '../src/components/Edit/Edit.css'
+import '../src/components/Footer/Footer.css'
+import '../src/components/Policy/Policy.css'
 
 function App() {
   const auth = getAuth();

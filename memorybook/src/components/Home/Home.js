@@ -2,11 +2,11 @@ import { useState, useEffect } from 'react';
 import { FaArrowAltCircleRight, FaArrowAltCircleLeft } from 'react-icons/fa'
 
 import { collection, getDocs } from 'firebase/firestore'
-import { db } from '../firebase';
+import { db } from '../../firebase';
 
-import MemoryItem from './Items/MemoryItem';
+import MemoryItem from '../Items/MemoryItem';
 
-import Welcome from './Items/HomeWelcome';
+import Welcome from './HomeWelcome';
 
 const Home = () => {
   const [memories, setMemories] = useState([]);

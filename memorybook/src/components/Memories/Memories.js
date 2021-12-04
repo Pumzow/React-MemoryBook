@@ -1,12 +1,12 @@
 import { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { AuthContext } from '../contexts/AuthContext';
+import { AuthContext } from '../../contexts/AuthContext';
 
 import { collection, getDocs } from 'firebase/firestore'
-import { db } from '../firebase';
+import { db } from '../../firebase';
 
-import MemoryItem from './Items/MemoryItem.js';
+import MemoryItem from '../Items/MemoryItem.js';
 
 
 

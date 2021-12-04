@@ -13,8 +13,6 @@ const Welcome = () => {
             ? <p> Here you can share your memories. <NavLink to="/Share"><u>Start sharing now.</u></NavLink></p>
             : <p> <NavLink to="/Register"><u>Register</u></NavLink> or <NavLink to="/Login"><u>Login</u></NavLink> to start sharing your memories with everyone.</p>
           }
-  
-  
         </section>
   );
 };

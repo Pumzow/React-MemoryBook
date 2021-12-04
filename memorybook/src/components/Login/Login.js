@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom'
 
-import { AuthContext } from '../contexts/AuthContext';
+import { AuthContext } from '../../contexts/AuthContext';
 
 import { getAuth ,signInWithEmailAndPassword } from "firebase/auth";
 
@@ -10,11 +10,7 @@ const Login = () => {
     const navigate = useNavigate();
   
     const {user} = useContext(AuthContext);
-  
-    if (user === null) {
-      navigate("/Memories");
-    }
-
+    
     if (user !== null) {
         navigate("/Memories");
     }
@@ -40,7 +36,7 @@ const Login = () => {
 
                 console.log(errorCode);
 
-                if (errorCode === "auth/invalid-email" || "auth/wrong-password") {
+                if (errorCode === "auth/invalid-email" || errorCode === "auth/wrong-password") {
                     setInvalidCredentials(true);
                 }
             });
