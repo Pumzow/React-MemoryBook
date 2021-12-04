@@ -1,22 +1,17 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+
+import { AuthContext } from '../../contexts/AuthContext';
+
 import { useParams, useNavigate } from 'react-router-dom';
 import { db } from '../../firebase';
-import { getAuth } from "firebase/auth";
 import { updateDoc, doc, getDoc } from 'firebase/firestore'
 
 const Edit = () => {
     const navigate = useNavigate();
   
-    const auth = getAuth();
+    const {user} = useContext(AuthContext);
   
-    const [user, setUser] = useState();
-  
-    useEffect(() => {
-        auth.onAuthStateChanged(setUser);
-    });
-  
-    if(user === null)
-    {
+    if (user === null) {
       navigate("/Login");
     }
 
@@ -29,9 +24,11 @@ const Edit = () => {
             const docRef = doc(db, "Memories", memoryId);
             const docSnap = await getDoc(docRef);
             setMemory(docSnap.data());
-            console.log(docSnap.data());
-        }
 
+            if(user.uid === memory.OwnerId){
+                navigate("/Memories")
+            }
+        }
         getMemory();
     }, [memoryId]);
 

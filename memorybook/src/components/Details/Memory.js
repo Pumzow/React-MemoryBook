@@ -12,33 +12,43 @@ import MemoryDetailsItem from './MemoryDetailsItem.js';
 const Memory = () => {
   const navigate = useNavigate();
 
-  const {user} = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
   if (user === null) {
     navigate("/Login");
   }
-  
+
   const { memoryId } = useParams();
 
   const [memory, setMemory] = useState({});
+
+  const [name, setName] = useState('...Loading')
 
   useEffect(() => {
     const getMemory = async () => {
       const docRef = doc(db, "Memories", memoryId);
       const docSnap = await getDoc(docRef);
       setMemory(docSnap.data());
-      console.log(docSnap.data());
+
+      getName(docSnap.data().OwnerId);
     }
 
     getMemory();
   }, [memoryId]);
 
-  const onEditHandler = async(e) =>{
+  const getName = async (ownerId) => {
+    const docRef = doc(db, "Users", ownerId);
+    const docSnap = await getDoc(docRef);
+    setName(docSnap.data().Username);
+  }
+
+  const onEditHandler = async (e) => {
     e.preventDefault();
-    
+
     navigate(`/memory/edit/${memoryId}`);
   }
-  const onDeleteHandler = async(e) =>{
+
+  const onDeleteHandler = async (e) => {
     e.preventDefault();
 
     await deleteDoc(doc(db, "Memories", memoryId));
@@ -49,12 +59,18 @@ const Memory = () => {
   return (
     <section>
       <article>
-        <MemoryDetailsItem key={memoryId} memory={memory} memoryId={memoryId} />
+        <MemoryDetailsItem key={memoryId} memory={memory} name={name} />
       </article>
       <article className="Memory-Interactions">
         <button> Like </button>
-        <button onClick={onEditHandler}> Edit </button>
-        <button onClick={onDeleteHandler}> Delete </button>
+        {user.uid === memory.OwnerId
+          ?
+            <>
+              <button onClick={onEditHandler}> Edit </button>
+              <button onClick={onDeleteHandler}> Delete </button>
+            </>
+          : <></>
+        }
       </article>
     </section>
 

@@ -31,11 +31,12 @@ import '../src/components/Policy/Policy.css'
 function App() {
   const auth = getAuth();
 
-  const [user, setUser] = useState();
+  const [user, setUser] = useState({});
 
   useEffect(() => {
     auth.onAuthStateChanged(setUser);
   }, [auth]);
+
 
   return (
     <AuthContext.Provider value={{user}}>

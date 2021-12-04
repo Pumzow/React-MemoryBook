@@ -4,24 +4,12 @@ import { db } from '../../firebase';
 import { getDoc, doc } from 'firebase/firestore'
 
 const MemoryDetailsItem = ({
-  memory, memoryId
+  memory, name
 }) => {
   const title = memory.Title;
   const date = memory.Date;
   const imageURL = memory.ImageURL;
   const description = memory.Description;
-
-  const [owenerId, setOwnerId] = useState();
-
-  useEffect(() => {
-    const getMemory = async () => {
-      const docRef = doc(db, "Memories", memoryId);
-      const docSnap = await getDoc(docRef);
-      setOwnerId(docSnap.data());
-    }
-
-    getMemory();
-  }, [memoryId]);
 
   return (
     <section className="Memory-Details">
@@ -31,8 +19,14 @@ const MemoryDetailsItem = ({
         <img src={imageURL} alt="" />
       </article>
       <article className="Memory-Details-Item-Description">
-        <h3> asd </h3>
-        <p> {description} </p>
+        {name !== undefined
+          ? 
+          <>
+            <h3> {name} </h3>
+            <p> {description} </p>
+          </>
+          : <p>...Loading</p>
+        }
       </article>
     </section>
   );
