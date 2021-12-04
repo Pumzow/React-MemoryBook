@@ -1,9 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import { AuthContext } from '../contexts/AuthContext';
 
 import { collection, getDocs } from 'firebase/firestore'
 import { db } from '../firebase';
-import { getAuth } from "firebase/auth";
 
 import MemoryItem from './Items/MemoryItem.js';
 
@@ -11,13 +12,8 @@ import MemoryItem from './Items/MemoryItem.js';
 
 const Memories = () => {
   const navigate = useNavigate();
-  const auth = getAuth();
 
-  const [user, setUser] = useState();
-
-  useEffect(() => {
-    auth.onAuthStateChanged(setUser);
-  }, [auth]);
+  const {user} = useContext(AuthContext);
 
   if (user === null) {
     navigate("/Login");

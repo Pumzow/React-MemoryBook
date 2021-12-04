@@ -1,29 +1,26 @@
-import { useState, useEffect } from 'react'
+import { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
+
+import { AuthContext } from '../contexts/AuthContext';
+
 import { db } from '../firebase';
 import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { collection, addDoc } from 'firebase/firestore'
 
 const Register = () => {
     const navigate = useNavigate();
-
-    const auth = getAuth();
-
-    const [user, setUser] = useState();
+  
+    const {user} = useContext(AuthContext);
+  
+    if (user !== null) {
+      navigate("/Memories");
+    }
 
     const [invalidEmail, setInvalidEmail] = useState(false);
     const [invalidUsername, setInvalidUsername] = useState(false);
     const [invalidPassword, setInvalidPassword] = useState(false);
     const [invalidRepeatPassword, setInvalidRepeatPassword] = useState(false);
     const [invalidImageUrl, setInvalidImageUrl] = useState(false);
-
-    useEffect(() => {
-        auth.onAuthStateChanged(setUser);
-    },[auth]);
-
-    if (user !== null) {
-        navigate("/Memories");
-    }
 
     const onRegisterHandler = async (e) => {
         e.preventDefault();

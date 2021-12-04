@@ -1,16 +1,10 @@
-import { useState, useEffect  } from 'react';
+import { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 
-import { getAuth } from "firebase/auth";
+import { AuthContext } from '../../contexts/AuthContext'
 
 const Welcome = () => {
-    const auth = getAuth();
-  
-    const [user, setUser] = useState();
-  
-    useEffect(() => {
-      auth.onAuthStateChanged(setUser);
-    }, [auth]);
+  const {user} = useContext(AuthContext);
 
     return (
         <section className="Home-Welcome">

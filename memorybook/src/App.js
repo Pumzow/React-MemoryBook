@@ -1,4 +1,7 @@
+import { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
+
+import { getAuth } from "firebase/auth";
 
 import Header from './components/Header.js';
 import Login from './components/Login.js';
@@ -10,6 +13,8 @@ import Share from './components/Share';
 import Edit from './components/Edit';
 import Footer from './components/Footer';
 import Policy from './components/Policy';
+
+import { AuthContext } from './contexts/AuthContext.js';
 
 import './App.css';
 import '../src/styles/Header.css'
@@ -24,11 +29,20 @@ import '../src/styles/Footer.css'
 import '../src/styles/Policy.css'
 
 function App() {
-  return (
-    <div className="App">
-      <Header />
+  const auth = getAuth();
 
-      <main>
+  const [user, setUser] = useState();
+
+  useEffect(() => {
+    auth.onAuthStateChanged(setUser);
+  }, [auth]);
+
+  return (
+    <AuthContext.Provider value={{user}}>
+      <div className="App">
+        <Header />
+
+        <main>
           <Routes>
             <Route path="/Login" element={<Login />} />
             <Route path="/Register" element={<Register />} />
@@ -40,10 +54,11 @@ function App() {
             <Route path="/Share" element={<Share />} />
             <Route path="/Privacy-Policy" element={<Policy />} />
           </Routes>
-      </main>
+        </main>
 
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </AuthContext.Provider>
   );
 }
 

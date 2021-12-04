@@ -1,24 +1,25 @@
-import { collection, addDoc } from 'firebase/firestore'
+import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom'
-import { db } from '../firebase';
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { useState, useEffect } from 'react';
+
+import { AuthContext } from '../contexts/AuthContext';
+
+import { getAuth ,signInWithEmailAndPassword } from "firebase/auth";
+
 
 const Login = () => {
     const navigate = useNavigate();
-
-    const auth = getAuth();
-
-    const [user, setUser] = useState();
-    const [invalidCredentials, setInvalidCredentials] = useState(false);
-
-    useEffect(() => {
-        auth.onAuthStateChanged(setUser);
-    });
+  
+    const {user} = useContext(AuthContext);
+  
+    if (user === null) {
+      navigate("/Memories");
+    }
 
     if (user !== null) {
         navigate("/Memories");
     }
+
+    const [invalidCredentials, setInvalidCredentials] = useState(false);
 
     const onLoginHandler = async (e) => {
         e.preventDefault();
@@ -26,7 +27,7 @@ const Login = () => {
         let formData = new FormData(e.currentTarget);
         let { email, password } = Object.fromEntries(formData)
 
-
+        const auth = getAuth();
 
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {

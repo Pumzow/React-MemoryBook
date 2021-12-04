@@ -1,22 +1,17 @@
-import { useState, useEffect} from 'react'
+import { useContext} from 'react'
 import { useNavigate } from 'react-router-dom'
+
+import { AuthContext } from '../contexts/AuthContext';
+
 import { db } from '../firebase';
-import { getAuth } from "firebase/auth";
 import { collection, addDoc } from 'firebase/firestore'
 
 const Share = () => {
   const navigate = useNavigate();
 
-  const auth = getAuth();
+  const {user} = useContext(AuthContext);
 
-  const [user, setUser] = useState();
-
-  useEffect(() => {
-      auth.onAuthStateChanged(setUser);
-  });
-
-  if(user === null)
-  {
+  if (user === null) {
     navigate("/Login");
   }
 
@@ -35,7 +30,7 @@ const Share = () => {
     const date = new Date();
     const sharedDate = date.getDate() + " " + monthNames[date.getMonth()] + " " + date.getFullYear();
 
-    const docRef = await addDoc(
+    await addDoc(
       memoriesRef, {
       Title: title,
       Description: description,
