@@ -4,7 +4,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthContext';
 
 import { db } from '../../firebase';
-import { getDoc, doc, deleteDoc } from 'firebase/firestore'
+import { getDoc, setDoc, doc, deleteDoc } from 'firebase/firestore'
 import MemoryDetailsItem from './MemoryDetailsItem.js';
 
 
@@ -21,6 +21,7 @@ const Memory = () => {
   const { memoryId } = useParams();
 
   const [memory, setMemory] = useState({});
+  const [likes, setLikes] = useState(0);
 
   const [name, setName] = useState('...Loading')
 
@@ -29,7 +30,7 @@ const Memory = () => {
       const docRef = doc(db, "Memories", memoryId);
       const docSnap = await getDoc(docRef);
       setMemory(docSnap.data());
-
+      setLikes(docSnap.data().Likes.length)
       getName(docSnap.data().OwnerId);
     }
 
@@ -40,6 +41,38 @@ const Memory = () => {
     const docRef = doc(db, "Users", ownerId);
     const docSnap = await getDoc(docRef);
     setName(docSnap.data().Username);
+
+  }
+
+  const onLikeHandler = async (e) => {
+    e.preventDefault();
+
+    const memoryRef = doc(db, 'Memories', memoryId);
+    const docSnap = await getDoc(memoryRef);
+
+    const _Likes = docSnap.data().Likes;
+
+    if (_Likes.includes(user.uid)) {
+      var index = _Likes.indexOf(user.uid);
+      if (index !== -1) {
+        _Likes.splice(index, 1);
+      }
+    }
+    else {
+
+      _Likes.push(user.uid);
+    }
+
+    await setDoc(
+      memoryRef, {
+      Likes: _Likes
+    }, { merge: true })
+      .then(() => {
+        setLikes(_Likes.length);
+      })
+      .catch((error) => {
+        alert("Unsuccessful operation, error: " + error)
+      });
   }
 
   const onEditHandler = async (e) => {
@@ -62,13 +95,13 @@ const Memory = () => {
         <MemoryDetailsItem key={memoryId} memory={memory} name={name} />
       </article>
       <article className="Memory-Interactions">
-        <button> Like </button>
+        <button onClick={onLikeHandler}> {memory.Likes !== undefined ? likes : 0}  Like </button>
         {user.uid === memory.OwnerId
           ?
-            <>
-              <button onClick={onEditHandler}> Edit </button>
-              <button onClick={onDeleteHandler}> Delete </button>
-            </>
+          <>
+            <button onClick={onEditHandler}> Edit </button>
+            <button onClick={onDeleteHandler}> Delete </button>
+          </>
           : <></>
         }
       </article>

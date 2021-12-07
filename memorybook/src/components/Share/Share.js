@@ -56,7 +56,7 @@ const Share = () => {
       Date: sharedDate,
       ImageURL: imageUrl,
       OwnerId: user.uid,
-      Likes: 0
+      Likes: []
     }
     )
       .then(() => {
