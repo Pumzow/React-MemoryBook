@@ -55,20 +55,21 @@ const Profile = () => {
         <section className="Profile">
             {owner !== undefined
                 ? <article className="Profile-Information">
+                <h1>Profile</h1>
                     <img src={owner.PhotoURL} alt="" />
-                    <h1> {owner.DisplayName} </h1>
+                    <h2> {owner.DisplayName} </h2>
                 </article>
                 : <p> Searching for user... </p>
             }
 
             <article className="Profile-Memories">
-                <h2> Memories </h2>
+                <h3> Memories </h3>
                 {length > 0
                     ? <article>
                         {memories.map((memory) => {
                             return (
                                 {
-                                    ...memory.OwnerId === user.uid
+                                    ...memory.OwnerId === owner.Uid
                                         ? < ProfileMemoryItem key={memory.id} memory={memory} />
                                         : <></>
                                 }

@@ -6,16 +6,42 @@
     background-color: #181818a7;
     font-size: 30px;
 
+    min-height: 700px;
+
     padding: 50px 100px;
     margin: 0px 70px;
     border-radius: 25px;
     text-align: center;
 }
 
+.Profile-Information{
+    width: 350px;
+    height: 350px;
+}
+.Profile-Information img{
+    object-fit: cover;
+    overflow: hidden;
+
+    width: 100%;
+    height: 100%;
+    border: white 10px solid;
+}
+.Profile-Information h2{
+    margin-top: -15px;
+
+    text-align: left;
+    font-size: 25px;
+}
+
+.Profile-Memories{
+    width: 850px;
+}
+
 .Profile-Memories article{
     display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
 }
 
@@ -28,7 +54,9 @@
 }
 
 .Profile-Memories-Items-List-Item{
-    width: 850px;
+    position: relative;
+    width: 400px;
+    height: 400px;
 }
 
 .Profile-Memories-Items-List-Item-Title{

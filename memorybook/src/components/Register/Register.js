@@ -80,7 +80,8 @@ const Register = () => {
         await setDoc(
             usersRef, {
                 DisplayName: name,
-                PhotoURL: photoURL
+                PhotoURL: photoURL,
+                Uid: id
             })
             .then(() => {
                 navigate("/Memories");
