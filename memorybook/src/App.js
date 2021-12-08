@@ -11,6 +11,7 @@ import Memories from './components/Memories/Memories.js';
 import Memory from './components/Details/Memory';
 import Share from './components/Share/Share';
 import Edit from './components/Edit/Edit.js';
+import Profile from './components/Profile/Profile.js';
 import Footer from './components/Footer/Footer';
 import Policy from './components/Policy/Policy';
 
@@ -25,6 +26,7 @@ import '../src/components/Memories/Memories.css'
 import '../src/components/Details/Details.css'
 import '../src/components/Share/Share.css'
 import '../src/components/Edit/Edit.css'
+import '../src/components/Profile/Profile.css'
 import '../src/components/Footer/Footer.css'
 import '../src/components/Policy/Policy.css'
 
@@ -52,6 +54,7 @@ function App() {
             <Route path="/Memories" element={<Memories />} />
             <Route path="/Memory/:memoryId" element={<Memory />} />
             <Route path="/Memory/Edit/:memoryId" element={<Edit />} />
+            <Route path="/Profile/:profileId" element={<Profile />} />
             <Route path="/Share" element={<Share />} />
             <Route path="/Privacy-Policy" element={<Policy />} />
           </Routes>

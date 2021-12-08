@@ -54,12 +54,12 @@ const Memory = () => {
 
     if (_Likes.includes(user.uid)) {
       var index = _Likes.indexOf(user.uid);
+
       if (index !== -1) {
         _Likes.splice(index, 1);
       }
     }
     else {
-
       _Likes.push(user.uid);
     }
 

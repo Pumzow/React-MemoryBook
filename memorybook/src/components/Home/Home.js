@@ -64,5 +64,5 @@ const Home = () => {
 export default Home;
 
 const compareLatest = (a, b) => {
-  return b.Likes - a.Likes;
+  return b.Likes.length - a.Likes.length;
 };

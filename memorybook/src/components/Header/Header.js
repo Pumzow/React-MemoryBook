@@ -1,16 +1,13 @@
+import { useContext } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { getAuth } from "firebase/auth";
-import { useState, useEffect } from 'react';
+
+import { AuthContext } from '../../contexts/AuthContext';
 
 const Header = () => {
     const navigate = useNavigate();
-    const auth = getAuth();
 
-    const [user, setUser] = useState(auth.displayName);
-
-    useEffect(() => {
-        auth.onAuthStateChanged(setUser);
-    });
+    const {user} = useContext(AuthContext);
 
     const signOutHandler = () => {
         console.log("Sign out!");
@@ -45,7 +42,7 @@ const Header = () => {
                 {user != null
                     ? <>
                         <li>
-                            <NavLink className="NavBar-Menu-Button" to="/Profile"> {user.displayName} </NavLink>
+                            <NavLink className="NavBar-Menu-Button" to={`/Profile/${user.uid}`}> {user.displayName} </NavLink>
                         </li>
                         <li>
                             <p className="NavBar-Menu-Button SignOut" onClick={signOutHandler}> Sign out </p>

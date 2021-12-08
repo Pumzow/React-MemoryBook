@@ -1,0 +1,73 @@
+.Profile{
+    display: flex;
+    justify-content: space-between;
+    
+    color: white;
+    background-color: #181818a7;
+    font-size: 30px;
+
+    padding: 50px 100px;
+    margin: 0px 70px;
+    border-radius: 25px;
+    text-align: center;
+}
+
+.Profile-Memories article{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.Profile-Memories article a{
+    margin: 10px;
+}
+
+.Profile-Memories-Items{
+    margin: 50px 0px;
+}
+
+.Profile-Memories-Items-List-Item{
+    width: 850px;
+}
+
+.Profile-Memories-Items-List-Item-Title{
+    position: absolute;
+    text-align: left;
+    padding: 10px;
+    bottom: 20px;
+    left: 10px;
+
+    font-size: 30px;
+    text-shadow: rgb(0, 0, 0) 5px 0 10px;
+    /*background-color: #181818;
+    border-radius: 15px;*/
+}
+
+.Profile-Memories-Items-List-Item-Date{
+    position: absolute;
+    text-align: left;
+    padding: 10px;
+    bottom: 0px;
+    left: 10px;
+
+    font-size: 20px;
+    text-shadow: rgb(0, 0, 0) 5px 0 10px;
+    /*background-color: #181818;
+    border-radius: 15px;*/
+}
+
+.Profile-Memories-Items-List-Item:hover{
+    box-shadow:inset 0 0 0 2000px rgb(26, 26, 26);
+    -webkit-backdrop-filter: blur(5px); /* Use for Safari 9+, Edge 17+ (not a mistake) and iOS Safari 9.2+ */
+    backdrop-filter: blur(5px); /* Supported in Chrome 76 */
+}
+
+.Profile-Memories-Items-List-Item img{
+    object-fit: cover;
+    overflow: hidden;
+    border: white 10px solid;
+    width: 100%;
+    height: 100%;
+}
+

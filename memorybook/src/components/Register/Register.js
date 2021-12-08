@@ -32,9 +32,9 @@ const Register = () => {
         setInvalidImageUrl(false);
 
         let formData = new FormData(e.currentTarget);
-        let { email, username, password, repeatPassword, imageUrl } = Object.fromEntries(formData)
+        let { email, name, password, repeatPassword, imageUrl } = Object.fromEntries(formData)
 
-        if (username.length <= 3 || username.length > 18) {
+        if (name.length <= 3 || name.length > 18) {
             console.log("here");
             setInvalidUsername(true);
             return;
@@ -55,11 +55,11 @@ const Register = () => {
                 const user = userCredential.user;
 
                 updateProfile(user, {
-                    displayName: username,
+                    displayName: name,
                     photoURL: imageUrl
                 });
 
-                saveUserToDatabase(user.uid, username);
+                saveUserToDatabase(user.uid, name, imageUrl);
             })
             .catch((error) => {
                 const errorCode = error.code;
@@ -75,11 +75,12 @@ const Register = () => {
             });
     };
 
-    const saveUserToDatabase = async (id, username) => {        
+    const saveUserToDatabase = async (id, name, photoURL) => {        
         const usersRef = doc(db, 'Users', id);
         await setDoc(
             usersRef, {
-                Username: username
+                DisplayName: name,
+                PhotoURL: photoURL
             })
             .then(() => {
                 navigate("/Memories");
@@ -104,8 +105,8 @@ const Register = () => {
                     <label htmlFor="leg-title"> E-mail </label><br />
                     <input id="Register-Form-Email" type="text" name="email" placeholder="Enter e-mail..." /><br />
 
-                    <label htmlFor="category"> Username </label><br />
-                    <input id="Register-Form-Username" type="text" name="username" placeholder="Enter username..." /><br />
+                    <label htmlFor="category"> Name </label><br />
+                    <input id="Register-Form-Username" type="text" name="name" placeholder="Enter name..." /><br />
 
                     <label htmlFor="category"> Password </label><br />
                     <input id="Register-Form-Password" type="password" name="password" placeholder="Enter password..." /><br />
