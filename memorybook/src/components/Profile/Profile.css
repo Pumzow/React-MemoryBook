@@ -1,6 +1,6 @@
 .Profile{
     display: flex;
-    justify-content: space-between;
+    justify-content: start;
     
     color: white;
     background-color: #181818a7;
@@ -15,6 +15,8 @@
 }
 
 .Profile-Information{
+    margin-right: 100px;
+
     width: 350px;
     height: 350px;
 }
@@ -34,7 +36,10 @@
 }
 
 .Profile-Memories{
-    width: 850px;
+    padding-left: 100px;
+
+    border-left-style: solid;
+    width: 1000px;
 }
 
 .Profile-Memories article{

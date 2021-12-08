@@ -14,10 +14,6 @@ const Memory = () => {
 
   const { user } = useContext(AuthContext);
 
-  if (user === null) {
-    navigate("/Login");
-  }
-
   const { memoryId } = useParams();
 
   const [memory, setMemory] = useState({});
@@ -94,17 +90,23 @@ const Memory = () => {
       <article>
         <MemoryDetailsItem key={memoryId} memory={memory} name={name} />
       </article>
-      <article className="Memory-Interactions">
-        <button onClick={onLikeHandler}> {memory.Likes !== undefined ? likes : 0}  Like </button>
-        {user.uid === memory.OwnerId
-          ?
-          <>
-            <button onClick={onEditHandler}> Edit </button>
-            <button onClick={onDeleteHandler}> Delete </button>
-          </>
-          : <></>
-        }
-      </article>
+      {user !== null
+        ? <>
+          <article className="Memory-Interactions">
+            <button onClick={onLikeHandler}> {memory.Likes !== undefined ? likes : 0}  Like </button>
+            {user !== null && user.uid === memory.OwnerId
+              ?
+              <>
+                <button onClick={onEditHandler}> Edit </button>
+                <button onClick={onDeleteHandler}> Delete </button>
+              </>
+              : <></>
+            }
+
+          </article>
+        </>
+        : <></>
+      }
     </section>
 
   );
