@@ -6,7 +6,7 @@ import { AuthContext } from '../../contexts/AuthContext';
 import { collection, getDocs } from 'firebase/firestore'
 import { db } from '../../firebase';
 
-import MemoryItem from '../Items/MemoryItem.js';
+import MemoryItem from './MemoriesMemoryItem';
 
 
 
@@ -25,7 +25,7 @@ const Memories = () => {
   useEffect(() => {
     const getMemories = async () => {
       const data = await getDocs(memoriesRef);
-      setMemories(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+      setMemories(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })).reverse());
     }
 
     getMemories();

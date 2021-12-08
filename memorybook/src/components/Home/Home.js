@@ -4,7 +4,7 @@ import { FaArrowAltCircleRight, FaArrowAltCircleLeft } from 'react-icons/fa'
 import { collection, getDocs } from 'firebase/firestore'
 import { db } from '../../firebase';
 
-import MemoryItem from '../Items/MemoryItem';
+import MemoryItem from './HomeMemoryItem';
 
 import Welcome from './HomeWelcome';
 

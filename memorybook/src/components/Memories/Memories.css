@@ -12,8 +12,9 @@
 
 .Memories article{
     display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
 }
 
@@ -24,11 +25,18 @@
 .Memories-Items{
     margin: 50px 0px;
 }
+
+.Memories-Items-List-Item{
+    position: relative;
+
+    width: 300px;
+    height: 300px;
+}
 .Memories-Items-List-Item-Title{
     position: absolute;
     text-align: left;
     padding: 10px;
-    bottom: 20px;
+    bottom: -10px;
     left: 10px;
 
     font-size: 30px;
@@ -41,19 +49,13 @@
     position: absolute;
     text-align: left;
     padding: 10px;
-    bottom: 0px;
+    bottom: -20px;
     left: 10px;
 
     font-size: 20px;
     text-shadow: rgb(0, 0, 0) 5px 0 10px;
     /*background-color: #181818;
     border-radius: 15px;*/
-}
-
-.Memories-Items-List-Item:hover{
-    box-shadow:inset 0 0 0 2000px rgb(26, 26, 26);
-    -webkit-backdrop-filter: blur(5px); /* Use for Safari 9+, Edge 17+ (not a mistake) and iOS Safari 9.2+ */
-    backdrop-filter: blur(5px); /* Supported in Chrome 76 */
 }
 
 .Memories-Items-List-Item img{
