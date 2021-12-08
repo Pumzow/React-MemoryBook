@@ -40,7 +40,7 @@ const Memory = () => {
   const getName = async (ownerId) => {
     const docRef = doc(db, "Users", ownerId);
     const docSnap = await getDoc(docRef);
-    setName(docSnap.data().Username);
+    setName(docSnap.data().DisplayName);
 
   }
 

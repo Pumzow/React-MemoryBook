@@ -1,7 +1,4 @@
-import { useState, useEffect } from 'react';
-
-import { db } from '../../firebase';
-import { getDoc, doc } from 'firebase/firestore'
+import { Link } from 'react-router-dom';
 
 const MemoryDetailsItem = ({
   memory, name
@@ -10,6 +7,7 @@ const MemoryDetailsItem = ({
   const date = memory.Date;
   const imageURL = memory.ImageURL;
   const description = memory.Description;
+  const ownerId = memory.OwnerId;
 
   return (
     <section className="Memory-Details">
@@ -19,10 +17,10 @@ const MemoryDetailsItem = ({
         <img src={imageURL} alt="" />
       </article>
       <article className="Memory-Details-Item-Description">
-        {name !== undefined
+        {memory !== undefined
           ? 
           <>
-            <h3> {name} </h3>
+            <Link className="Link-Without-Decoration" to={`/Profile/${ownerId}`}><h3> {name} </h3></Link>
             <p> {description} </p>
           </>
           : <p>...Loading</p>
