@@ -1,0 +1,10 @@
+.Error404{
+    color: white;
+    background-color: #181818a7;
+    font-size: 30px;
+
+    padding: 50px 100px;
+    margin: 200px 550px;
+    border-radius: 25px;
+    text-align: center;
+}

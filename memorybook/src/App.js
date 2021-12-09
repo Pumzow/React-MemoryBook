@@ -14,6 +14,7 @@ import Edit from './components/Edit/Edit.js';
 import Profile from './components/Profile/Profile.js';
 import Footer from './components/Footer/Footer';
 import Policy from './components/Policy/Policy';
+import Error404 from './components/Error404/Error404.js';
 
 import { AuthContext } from './contexts/AuthContext.js';
 
@@ -29,6 +30,7 @@ import '../src/components/Edit/Edit.css'
 import '../src/components/Profile/Profile.css'
 import '../src/components/Footer/Footer.css'
 import '../src/components/Policy/Policy.css'
+import '../src/components/Error404/Error404.css'
 
 function App() {
   const auth = getAuth();
@@ -57,6 +59,7 @@ function App() {
             <Route path="/Profile/:profileId" element={<Profile />} />
             <Route path="/Share" element={<Share />} />
             <Route path="/Privacy-Policy" element={<Policy />} />
+            <Route path="*" element={<Error404 />} />
           </Routes>
         </main>
 
