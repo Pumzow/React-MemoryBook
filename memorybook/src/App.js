@@ -60,6 +60,7 @@ function App() {
             <Route path="/Share" element={<Share />} />
             <Route path="/Privacy-Policy" element={<Policy />} />
             <Route path="*" element={<Error404 />} />
+            <Route path="/memory/*" element={<Error404 />} />
           </Routes>
         </main>
 

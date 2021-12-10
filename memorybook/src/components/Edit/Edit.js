@@ -27,7 +27,15 @@ const Edit = () => {
         const getMemory = async () => {
             const docRef = doc(db, "Memories", memoryId);
             const docSnap = await getDoc(docRef);
-            setMemory(docSnap.data());
+
+            if (docSnap.data() === undefined) {
+                navigate("/Error404");
+                return;
+            }
+            else {
+                setMemory(docSnap.data());
+            }
+
 
             if (user.uid === memory.OwnerId) {
                 navigate("/Memories")

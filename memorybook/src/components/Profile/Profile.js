@@ -28,8 +28,15 @@ const Profile = () => {
         const getOwner = async () => {
             const docRef = doc(db, "Users", profileId);
             const docSnap = await getDoc(docRef);
-            console.log(docSnap.data());
-            setOwner(docSnap.data());
+
+            if (docSnap.data() === undefined) {
+                navigate("/Error404");
+                return;
+            }
+            else {
+                setOwner(docSnap.data());
+            }
+
         }
 
         if (profileId !== undefined) {
@@ -55,7 +62,7 @@ const Profile = () => {
         <section className="Profile">
             {owner !== undefined
                 ? <article className="Profile-Information">
-                <h1>Profile</h1>
+                    <h1>Profile</h1>
                     <img src={owner.PhotoURL} alt="" />
                     <h2> {owner.DisplayName} </h2>
                 </article>

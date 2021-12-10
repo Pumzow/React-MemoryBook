@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 import { AuthContext } from '../../contexts/AuthContext';
 
@@ -24,10 +24,17 @@ const Memory = () => {
   useEffect(() => {
     const getMemory = async () => {
       const docRef = doc(db, "Memories", memoryId);
-      const docSnap = await getDoc(docRef);
-      setMemory(docSnap.data());
-      setLikes(docSnap.data().Likes.length)
-      getName(docSnap.data().OwnerId);
+      const docSnap = await getDoc(docRef)
+
+      if (docSnap.data() === undefined) {
+        navigate("/Error404");
+        return;
+      }
+      else {
+        setMemory(docSnap.data());
+        setLikes(docSnap.data().Likes.length)
+        getName(docSnap.data().OwnerId);
+      }
     }
 
     getMemory();
