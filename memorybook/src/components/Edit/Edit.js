@@ -54,7 +54,7 @@ const Edit = () => {
         let { title, description } = Object.fromEntries(formData)
 
 
-        if (title.length === '' || title.length > 32) {
+        if (title.length === 0 || title.length > 32) {
             setInvalidTitle(true);
             return;
         }

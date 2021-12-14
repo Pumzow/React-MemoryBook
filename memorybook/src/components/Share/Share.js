@@ -29,7 +29,7 @@ const Share = () => {
     let formData = new FormData(e.currentTarget);
     let { title, description, imageUrl } = Object.fromEntries(formData)
 
-    if (title.length === '' || title.length > 32) {
+    if (title.length === 0 || title.length > 32) {
       setInvalidTitle(true);
       return;
     }
@@ -105,18 +105,27 @@ const ChangeMemoryPreviewImage = (e) => {
   const memoryPreviewImageRef = document.querySelector('#MemoryPreviewImage');
   const imageUrlRef = document.querySelector('#Share-Form-ImageURL');
 
+  if(imageUrlRef.value == ''){
+    memoryPreviewImageRef.src = "https://merriam-webster.com/assets/mw/images/gallery/gal-home-edpick-lg/empty-speech-bubble-7508-68642ecb0f0a19313dd31c16f67e67e1@1x.jpg";
+    return;
+  }
+
   fetch(imageUrlRef.value, {
-    method: 'HEAD'
+    method: 'HEAD',
+    mode: "no-cors" // 'cors' by default
   })
     .then(res => {
       if (res.ok) {
         console.log('Image exists.');
         memoryPreviewImageRef.src = imageUrlRef.value
       } else {
-        console.log('Image does not exist.');
-        memoryPreviewImageRef.src = "https://merriam-webster.com/assets/mw/images/gallery/gal-home-edpick-lg/empty-speech-bubble-7508-68642ecb0f0a19313dd31c16f67e67e1@1x.jpg";
+        console.log('CORS Problem. SHoud be fixed.');
+        memoryPreviewImageRef.src = imageUrlRef.value;
       }
-    }).catch(err => console.log('Error:', err));
+    }).catch(err => {
+      console.log('Error:', err)
+      memoryPreviewImageRef.src = "https://merriam-webster.com/assets/mw/images/gallery/gal-home-edpick-lg/empty-speech-bubble-7508-68642ecb0f0a19313dd31c16f67e67e1@1x.jpg";
+    });
 }
 
 export default Share;
