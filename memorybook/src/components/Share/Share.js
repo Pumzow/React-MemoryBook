@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../contexts/AuthContext';
 
 import { db } from '../../firebase';
-import { collection, addDoc } from 'firebase/firestore'
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore'
 
 const Share = () => {
   const navigate = useNavigate();
@@ -54,6 +54,7 @@ const Share = () => {
       Title: title,
       Description: description,
       Date: sharedDate,
+      TimeStamp: serverTimestamp(),
       ImageURL: imageUrl,
       OwnerId: user.uid,
       Likes: []

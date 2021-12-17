@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { AuthContext } from '../../contexts/AuthContext';
 
-import { collection, getDocs } from 'firebase/firestore'
+import { collection, getDocs, onSnapshot, orderBy, query } from 'firebase/firestore'
 import { db } from '../../firebase';
 
 import MemoryItem from './MemoriesMemoryItem';
@@ -23,12 +23,20 @@ const Memories = () => {
   const memoriesRef = collection(db, "Memories");
 
   useEffect(() => {
-    const getMemories = async () => {
-      const data = await getDocs(memoriesRef);
-      setMemories(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })).reverse());
-    }
+    //const getMemories = async () => {
+    //  const data = await getDocs(memoriesRef);
+    //  setMemories(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })).reverse());
+    //}
 
-    getMemories();
+    //getMemories();
+
+    const q = query(memoriesRef, orderBy("TimeStamp", "desc"));
+
+    const unsub = onSnapshot(q, (snapshot) =>
+      setMemories(snapshot.docs.map((doc) => ({...doc.data(), id: doc.id})))
+    );
+
+    return unsub;
   }, []);
 
   const length = memories.length;

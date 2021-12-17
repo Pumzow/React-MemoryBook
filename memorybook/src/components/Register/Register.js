@@ -59,7 +59,7 @@ const Register = () => {
                     photoURL: imageUrl
                 });
 
-                saveUserToDatabase(user.uid, name, imageUrl);
+                saveUserToDatabase(user.uid, email, name, imageUrl);
             })
             .catch((error) => {
                 const errorCode = error.code;
@@ -75,11 +75,12 @@ const Register = () => {
             });
     };
 
-    const saveUserToDatabase = async (id, name, photoURL) => {        
+    const saveUserToDatabase = async (id, email, name, photoURL) => {        
         const usersRef = doc(db, 'Users', id);
         await setDoc(
             usersRef, {
                 DisplayName: name,
+                Email: email,
                 PhotoURL: photoURL,
                 Uid: id
             })

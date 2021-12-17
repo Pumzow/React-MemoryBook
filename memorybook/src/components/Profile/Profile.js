@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import { AuthContext } from '../../contexts/AuthContext';
 
-import { collection, getDocs, getDoc, doc } from 'firebase/firestore'
+import { collection, getDoc, doc, query, orderBy, onSnapshot } from 'firebase/firestore'
 import { db } from '../../firebase';
 
 import ProfileMemoryItem from '../Profile/ProfileMemoryItem.js';
@@ -20,7 +20,6 @@ const Profile = () => {
     }
 
     const { profileId } = useParams();
-    console.log(profileId);
     const [owner, setOwner] = useState();
 
 
@@ -48,12 +47,20 @@ const Profile = () => {
     const memoriesRef = collection(db, "Memories");
 
     useEffect(() => {
-        const getMemories = async () => {
-            const data = await getDocs(memoriesRef);
-            setMemories(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-        }
+        //const getMemories = async () => {
+        //    const data = await getDocs(memoriesRef);
+        //    setMemories(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+        //}
 
-        getMemories();
+        //getMemories();
+
+        const q = query(memoriesRef, orderBy("TimeStamp", "desc"));
+    
+        const unsub = onSnapshot(q, (snapshot) =>
+          setMemories(snapshot.docs.map((doc) => ({...doc.data(), id: doc.id})))
+        );
+    
+        return unsub;
     }, []);
 
     const length = memories.length;
@@ -64,6 +71,7 @@ const Profile = () => {
                 ? <article className="Profile-Information">
                     <h1>Profile</h1>
                     <img src={owner.PhotoURL} alt="" />
+                    <h3> {owner.Email} </h3>
                     <h2> {owner.DisplayName} </h2>
                 </article>
                 : <p> Searching for user... </p>
