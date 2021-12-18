@@ -138,18 +138,19 @@ const ChangeUserPreviewImage = (e) => {
     const imageUrlRef = document.querySelector('#Register-Form-ImageURL');
 
     fetch(imageUrlRef.value, {
-        method: 'HEAD'
+        method: 'HEAD',
+        mode: "no-cors" // 'cors' by default
     })
         .then(res => {
             if (res.ok) {
                 console.log('Image exists.');
-                memoryPreviewImageRef.src = imageUrlRef.value
+                memoryPreviewImageRef.src = imageUrlRef.value;
             } else {
-                console.log('Image does not exist.');
-                memoryPreviewImageRef.src = "https://i0.wp.com/www.artstation.com/assets/default_avatar.jpg?ssl=1";
+                console.log('CORS Problem. SHoud be fixed.');
+                memoryPreviewImageRef.src = imageUrlRef.value;
             }
         }).catch(err => {
-
+            console.log('Error:', err)
             memoryPreviewImageRef.src = "https://i0.wp.com/www.artstation.com/assets/default_avatar.jpg?ssl=1";
         });
 }
